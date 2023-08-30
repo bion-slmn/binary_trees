@@ -33,7 +33,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		{
 			if (not_full == 1)
 				return (0);
-			enQueue(que, &rear, temp->left);
+			enQueue(que, &rear, temp->right);
 		}
 		else
 			not_full = 1;
