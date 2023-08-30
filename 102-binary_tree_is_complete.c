@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "binary_trees.h"
 #define MAX_SIZE 100
+
 /**
  * binary_tree_is_complete - checks if a binary tree is complete
  * @tree:  a pointer to the root node of the tree to check
@@ -8,77 +9,39 @@
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int front = 0, rear = 0, not_full = 0;
-	binary_tree_t **que;
-	const binary_tree_t *temp = tree;
+	int no_node = countNodes((binary_tree_t *)tree);
 
 	if (!tree)
 		return (0);
-	que = createQue();
-	if (!que)
+
+	return (checkComplete((binary_tree_t *)tree, 0, no_node));
+}
+/**
+ * countNodes - counts the number of nodes
+ * @tree: is the root node
+ * Return: a number
+ */
+int countNodes(binary_tree_t *tree)
+{
+	if (!tree)
 		return (0);
-	enQueue(que, &rear, (binary_tree_t *)temp);
-	while (front != rear)
-	{
-		temp = deQueue(que, &front);
-		if (temp->left)
-		{
-			if (not_full == 1)
-				return (0);
-			enQueue(que, &rear, temp->left);
-		}
-		else
-			not_full = 1;
-		if (temp->right)
-		{
-			if (not_full == 1)
-				return (0);
-			enQueue(que, &rear, temp->right);
-		}
-		else
-			not_full = 1;
-	}
-	return (1);
 
+	return (countNodes(tree->left) + countNodes(tree->right) + 1);
 }
 /**
- * createQue - create a queue
- * Return: a queue
+ * checkComplete - checks that a tree is complete
+ * @index: is the index of the parent
+ * @numberNodes: the total number of nodes
+ * @tree: root of the binary tree
+ * Return: 1 on success or 0 on failure
  */
-binary_tree_t **createQue()
+int checkComplete(binary_tree_t *tree, int index, int numberNodes)
 {
-	binary_tree_t **que = malloc(sizeof(binary_tree_t *) * MAX_SIZE);
+	if (!tree || numberNodes == 0)
+		return (1);
 
-	int i;
-
-	if (!que)
-		return (NULL);
-	for (i = 0; i < MAX_SIZE; i++)
-	{
-		que[i] = NULL;
-	}
-	return (que);
-}
-/**
- * enQueue - adds a node to the que
- * @que: it the queue where the node is added
- * @rear: the pointer to the last node
- * @newnode: is the new node to be added
- */
-void enQueue(binary_tree_t **que, int *rear, binary_tree_t *newnode)
-{
-	que[*rear] = newnode;
-	(*rear)++;
-}
-
-/**
- * deQueue - removes the front node in a que
- * @que: is the queue from which a node is removed
- * @front: a pointer to the front of a a que
- * Return: the removed mode
- */
-binary_tree_t *deQueue(binary_tree_t **que, int *front)
-{
-	(*front)++;
-	return (que[*front - 1]);
+	if (index >= numberNodes)
+		return (0);
+	return (checkComplete(tree->left, 2 * index + 1, numberNodes) &&
+			checkComplete(tree->right, 2 * index + 2, numberNodes));
 }
