@@ -13,7 +13,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	binary_tree_t **queue = createQue();
 	const binary_tree_t *temp = tree;
 
-	if (!tree || !func)
+	if (!tree || !func || !queue)
 		return;
 
 	while (temp)
@@ -29,6 +29,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		/*deque the queue */
 		temp = deQueue(queue, &front);
 	}
+	free_Q(queue);
 }
 
 /**
@@ -39,8 +40,14 @@ binary_tree_t **createQue()
 {
 	binary_tree_t **que = malloc(sizeof(binary_tree_t *) * MAX_SIZE);
 
+	int i;
+
 	if (!que)
 		return (NULL);
+	for (i = 0; i < MAX_SIZE; i++)
+	{
+		que[i] = NULL;
+	}
 	return (que);
 }
 /**
@@ -65,4 +72,19 @@ binary_tree_t *deQueue(binary_tree_t **que, int *front)
 {
 	(*front)++;
 	return (que[*front - 1]);
+}
+/**
+ * free_Q - free memory
+ * @que: the que to be freed
+ */
+void free_Q(binary_tree_t **que)
+{
+	int i = 0;
+
+	for (; i < MAX_SIZE; i++)
+	{
+		if (que[i] != NULL)
+			free(que[i]);
+	}
+	free(que);
 }
