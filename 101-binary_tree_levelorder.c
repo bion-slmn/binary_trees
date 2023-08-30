@@ -29,7 +29,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		/*deque the queue */
 		temp = deQueue(queue, &front);
 	}
-	free_Q(queue);
+	free(queue);
 }
 
 /**
@@ -86,5 +86,5 @@ void free_Q(binary_tree_t **que)
 		if (que[i] != NULL)
 			free(que[i]);
 	}
-	free(que);
+	/*free(que);*/
 }
