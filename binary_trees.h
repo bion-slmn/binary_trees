@@ -51,4 +51,6 @@ binary_tree_t *deQueue(binary_tree_t **que, int *front);
 binary_tree_t **createQue();
 void free_Q(binary_tree_t **que);
 int binary_tree_is_complete(const binary_tree_t *tree);
+int checkComplete(binary_tree_t *tree, int index, int numberNodes);
+int countNodes(binary_tree_t *tree);
 #endif
