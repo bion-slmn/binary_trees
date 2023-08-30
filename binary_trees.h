@@ -49,4 +49,5 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 void enQueue(binary_tree_t **que, int *rear, binary_tree_t *newnode);
 binary_tree_t *deQueue(binary_tree_t **que, int *front);
 binary_tree_t **createQue();
+void free_Q(binary_tree_t **que);
 #endif
