@@ -50,4 +50,5 @@ void enQueue(binary_tree_t **que, int *rear, binary_tree_t *newnode);
 binary_tree_t *deQueue(binary_tree_t **que, int *front);
 binary_tree_t **createQue();
 void free_Q(binary_tree_t **que);
+int binary_tree_is_complete(const binary_tree_t *tree);
 #endif
