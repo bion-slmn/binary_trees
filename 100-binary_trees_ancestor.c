@@ -14,16 +14,17 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	const binary_tree_t *temp, *temp1;
 	int i = 1, j = 1;
 
+	if (!first || !second)
+		return (NULL);
+
 	temp = first;
 	f[0] = (binary_tree_t *)temp;
-
 	while (temp->parent != NULL)
 	{
 		f[i] = temp->parent;
 		temp = temp->parent;
 		i++;
 	}
-
 	temp1 = second;
 	s[0] = (binary_tree_t *) temp1;
 	while (temp1->parent != NULL)
@@ -33,7 +34,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		j++;
 	}
 	i = 0;
-
 	while (f[i])
 	{
 		j = 0;
