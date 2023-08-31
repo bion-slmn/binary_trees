@@ -53,4 +53,5 @@ void free_Q(binary_tree_t **que);
 int binary_tree_is_complete(const binary_tree_t *tree);
 int checkComplete(binary_tree_t *tree, int index, int numberNodes);
 int countNodes(binary_tree_t *tree);
+binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 #endif
